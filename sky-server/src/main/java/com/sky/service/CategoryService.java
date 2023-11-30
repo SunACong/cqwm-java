@@ -7,7 +7,7 @@ import com.sky.result.PageResult;
 
 import java.util.List;
 
-public interface CateGoryService {
+public interface CategoryService {
     /**
      * 保存类别信息
      *

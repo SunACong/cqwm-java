@@ -8,6 +8,10 @@ sky:
     password: 123456
   file:
     upload-dir: E://MyProject//cqwm//nginx-1.20.2//html//sky//static
+  wechat:
+    appid: wx310e78c9795aeffc
+    secret: 2773c1f3bd22ef8015dfd0bdec953eb1
+
 spring:
   redis:
     host: localhost

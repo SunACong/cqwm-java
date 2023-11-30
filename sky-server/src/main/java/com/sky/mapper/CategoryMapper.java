@@ -7,7 +7,7 @@ import com.sky.enumeration.OperationType;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface CateGoryMapper {
+public interface CategoryMapper {
     @AutoFill(OperationType.INSERT)
     void insert(Category category);
 

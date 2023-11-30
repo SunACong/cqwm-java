@@ -6,9 +6,9 @@ import com.sky.constant.StatusConstant;
 import com.sky.dto.CategoryDTO;
 import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
-import com.sky.mapper.CateGoryMapper;
+import com.sky.mapper.CategoryMapper;
 import com.sky.result.PageResult;
-import com.sky.service.CateGoryService;
+import com.sky.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +16,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CateGoryServiceImpl implements CateGoryService {
+public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
-    private CateGoryMapper cateGoryMapper;
+    private CategoryMapper cateGoryMapper;
 
 
     /**

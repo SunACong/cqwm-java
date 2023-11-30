@@ -60,6 +60,13 @@
 
 
     <select id="list" resultType="com.sky.entity.Dish">
-        select * from dish where category_id = #{categoryId}
+        select * from dish where
+        <if test="name!= null">name like concat("%", #{name},"%") and</if>
+        <if test="categoryId!= null">category_id = #{categoryId} and</if>
+        <if test="status!= null">status = #{status} and</if>
+        order by create_time desc
     </select>
+
+
+
 </mapper>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sky.mapper.CateGoryMapper">
+<mapper namespace="com.sky.mapper.CategoryMapper">
 
     <insert id="insert">
         insert into category (type, name, sort, status, create_time, update_time, create_user, update_user)

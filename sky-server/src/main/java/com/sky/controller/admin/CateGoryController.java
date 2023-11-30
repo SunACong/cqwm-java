@@ -7,7 +7,7 @@ import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
-import com.sky.service.CateGoryService;
+import com.sky.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ import java.util.List;
 public class CateGoryController {
 
     @Autowired
-    private CateGoryService cateGoryService;
+    private CategoryService cateGoryService;
 
     /**
      * 新增分类/套餐
