@@ -24,6 +24,12 @@ public class ShoppingCartController {
     @Autowired
     private ShoppingCartService shoppingCartService;
 
+    /**
+     * 添加购物车
+     *
+     * @param shoppingCartDTO 购物车对象
+     * @return 返回操作结果
+     */
     @PostMapping("/add")
     @ApiOperation(value = "添加购物车", notes = "添加购物车", httpMethod = "POST")
     public Result<String> add(@RequestBody ShoppingCartDTO shoppingCartDTO) {
@@ -34,6 +40,11 @@ public class ShoppingCartController {
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 
+    /**
+     * 查询购物车列表
+     *
+     * @return 返回购物车列表
+     */
     @GetMapping("/list")
     @ApiOperation("查询购物车列表")
     public Result<List<ShoppingCart>> lsit() {
@@ -43,6 +54,11 @@ public class ShoppingCartController {
     }
 
 
+    /**
+     * 清空购物车
+     *
+     * @return 返回操作结果，成功时包含清空成功的消息
+     */
     @DeleteMapping("/clean")
     @ApiOperation("清空购物车")
     public Result<String> clean() {
@@ -53,6 +69,12 @@ public class ShoppingCartController {
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 
+    /**
+     * 从购物车中删除商品
+     *
+     * @param shoppingCartDTO 购物车商品信息
+     * @return 操作结果，成功返回SUCCESS，失败返回失败信息
+     */
     @PostMapping("/sub")
     @ApiOperation("删除购物车中一个商品")
     public Result<String> sub(@RequestBody ShoppingCartDTO shoppingCartDTO) {

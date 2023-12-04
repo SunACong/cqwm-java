@@ -91,6 +91,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         shoppingCartMapper.clean(currentId);
     }
 
+    /**
+     * 从购物车中减去商品
+     *
+     * @param shoppingCartDTO 购物车DTO对象
+     */
     @Override
     public void sub(ShoppingCartDTO shoppingCartDTO) {
         ShoppingCart shoppingCart = new ShoppingCart();
@@ -100,7 +105,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
         List<ShoppingCart> list = shoppingCartMapper.list(shoppingCart);
         ShoppingCart shoppingCart1 = list.get(0);
+
         Integer number = shoppingCart1.getNumber();
+
         if (number > 1) {
             shoppingCart1.setNumber(number - 1);
             shoppingCartMapper.update(shoppingCart1);
