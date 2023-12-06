@@ -31,4 +31,6 @@ public interface OrderService {
      * @return 订单列表
      */
     PageResult historyOrders(Integer page, Integer pageSize, Integer status);
+
+    void reminder(Long id);
 }

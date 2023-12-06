@@ -32,4 +32,8 @@ public interface OrderMapper {
     List<Orders> getByStatusAndOrderTime(Integer status, LocalDateTime time);
 
     Page<Orders> page(OrdersPageQueryDTO ordersPageQueryDTO);
+
+
+    @Select(value = "select * from orders where id = #{id}")
+    Orders getById(Long id);
 }

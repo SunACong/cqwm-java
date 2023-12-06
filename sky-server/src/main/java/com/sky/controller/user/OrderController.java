@@ -1,6 +1,7 @@
 package com.sky.controller.user;
 
 
+import com.sky.constant.MessageConstant;
 import com.sky.dto.OrdersPaymentDTO;
 import com.sky.dto.OrdersSubmitDTO;
 import com.sky.result.PageResult;
@@ -55,6 +56,14 @@ public class OrderController {
     }
 
 
+    /**
+     * 获取历史订单信息
+     *
+     * @param page 页码
+     * @param pageSize 每页数量
+     * @param status 订单状态
+     * @return 返回查询结果，包括分页信息和订单列表
+     */
     @GetMapping("/historyOrders")
     @ApiOperation("查询历史订单")
     public Result<PageResult> historyOrders(Integer page, Integer pageSize, Integer status) {
@@ -65,6 +74,12 @@ public class OrderController {
         return Result.success(pageResult);
     }
 
-
+    @GetMapping("/reminder/{id}")
+    @ApiOperation("催单")
+    public Result<String> reminder(@PathVariable("id") Long id) {
+        log.info("催单：{}", id);
+        orderService.reminder(id);
+        return Result.success(MessageConstant.OPERATE_SUCCESS);
+    }
 }
 
