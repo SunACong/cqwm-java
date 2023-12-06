@@ -53,6 +53,13 @@ public class OrderServiceImpl implements OrderService {
 
 
 
+    /**
+     * 提交订单
+     *
+     * @param ordersSubmitDTO 订单提交参数
+     * @return 返回订单提交结果
+     * @throws RuntimeException 如果地址为空或购物车为空，则抛出异常
+     */
     @Override
     @Transactional
     public OrderSubmitVO submit(OrdersSubmitDTO ordersSubmitDTO) {
@@ -110,6 +117,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
+    /**
+     * 订单支付
+     *
+     * @param ordersPaymentDTO 订单支付DTO
+     * @return 订单支付VO
+     * @throws Exception 异常信息
+     */
     /**
      * 订单支付
      *
@@ -171,6 +185,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
+    /**
+     * 查询订单历史记录
+     *
+     * @param page 页码
+     * @param pageSize 每页数量
+     * @param status 订单状态
+     * @return 包含订单历史记录的分页结果
+     */
     @Override
     public PageResult historyOrders(Integer page, Integer pageSize, Integer status) {
 
@@ -198,6 +220,12 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
+    /**
+     * 发送订单提醒
+     *
+     * @param id 订单ID
+     * @throws OrderBusinessException 订单业务异常
+     */
     @Override
     public void reminder(Long id) {
         Orders orders = orderMapper.getById(id);
@@ -210,5 +238,48 @@ public class OrderServiceImpl implements OrderService {
         map.put("content", "订单号:" + orders.getNumber());
         String jsonString = JSON.toJSONString(map);
         webSocketServer.sendToAllClient(jsonString);
+    }
+
+    @Override
+    public void cancel(Long id) {
+        Orders orders = Orders.builder()
+                .id(id)
+                .status(Orders.CANCELLED)
+                .cancelTime(LocalDateTime.now())
+                .build();
+        orderMapper.update(orders);
+    }
+
+    /**
+     * 根据订单ID获取订单详情
+     *
+     * @param id 订单ID
+     * @return 返回订单详情Result<OrderVO>对象
+     */
+    @Override
+    public OrderVO orderDetail(Long id) {
+        Orders orders = orderMapper.getById(id);
+        if (orders == null) {
+            throw new OrderBusinessException(MessageConstant.ORDER_STATUS_ERROR);
+        } else {
+            List<OrderDetail> orderDetailList = orderDetailMapper.getByOrderId(id);
+            AddressBook addressBook = addressBookMapper.getById(orders.getAddressBookId());
+            OrderVO orderVO = new OrderVO();
+            BeanUtils.copyProperties(orders, orderVO);
+            orderVO.setAddress(addressBook.getProvinceName() + " " + addressBook.getCityName() + " " + addressBook.getDistrictName() + " " + addressBook.getDetail());
+            orderVO.setOrderDetailList(orderDetailList);
+            return orderVO;
+        }
+    }
+
+    /**
+     * 根据订单id，进行再来一单操作
+     *
+     * @param id 订单id
+     * @return 操作结果，成功返回MessageConstant.OPERATE_SUCCESS
+     */
+    @Override
+    public void repetition(Long id) {
+
     }
 }

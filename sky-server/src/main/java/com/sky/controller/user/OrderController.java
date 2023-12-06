@@ -9,13 +9,14 @@ import com.sky.result.Result;
 import com.sky.service.OrderService;
 import com.sky.vo.OrderPaymentVO;
 import com.sky.vo.OrderSubmitVO;
+import com.sky.vo.OrderVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@RestController("userOrderController")
 @RequestMapping("/user/order")
 @Api(tags = "小程序-订单接口")
 @Slf4j
@@ -74,11 +75,68 @@ public class OrderController {
         return Result.success(pageResult);
     }
 
+    /**
+     * 通过GET请求获取提醒服务，根据订单ID催单。
+     *
+     * @param id 订单ID
+     * @return 操作结果，成功时返回"消息常量.OPERATE_SUCCESS"
+     */
     @GetMapping("/reminder/{id}")
     @ApiOperation("催单")
     public Result<String> reminder(@PathVariable("id") Long id) {
         log.info("催单：{}", id);
         orderService.reminder(id);
+        return Result.success(MessageConstant.OPERATE_SUCCESS);
+    }
+
+
+    /**
+     * 取消订单
+     *
+     * @param id 订单ID
+     * @return 操作结果
+     */
+    @PutMapping("/cancel/{id}")
+    @ApiOperation("取消订单")
+    public Result<String> cancel(@PathVariable("id") Long id) {
+        log.info("取消订单:{}", id);
+
+        orderService.cancel(id);
+
+        return Result.success(MessageConstant.OPERATE_SUCCESS);
+    }
+
+    /**
+     * 根据订单ID获取订单详情
+     *
+     * @param id 订单ID
+     * @return 返回订单详情Result<OrderVO>对象
+     */
+    @GetMapping("/orderDetail/{id}")
+    @ApiOperation("订单详情")
+    public Result<OrderVO> orderDetail(@PathVariable("id") Long id) {
+
+        log.info("订单详情:{}", id);
+
+        OrderVO orderVO =   orderService.orderDetail(id);
+
+        return Result.success(orderVO);
+    }
+
+
+    /**
+     * 根据订单id，进行再来一单操作
+     *
+     * @param id 订单id
+     * @return 操作结果，成功返回MessageConstant.OPERATE_SUCCESS
+     */
+    @PostMapping("/repetition/{id}")
+    @ApiOperation("再来一单")
+    public Result<String> repetition(@PathVariable("id") Long id) {
+        log.info("再来一单:{}", id);
+
+        orderService.repetition(id);
+
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }
 }
