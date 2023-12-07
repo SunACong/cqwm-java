@@ -2,6 +2,7 @@ package com.sky.controller.user;
 
 
 import com.sky.constant.MessageConstant;
+import com.sky.dto.OrdersCancelDTO;
 import com.sky.dto.OrdersPaymentDTO;
 import com.sky.dto.OrdersSubmitDTO;
 import com.sky.result.PageResult;
@@ -101,7 +102,10 @@ public class OrderController {
     public Result<String> cancel(@PathVariable("id") Long id) {
         log.info("取消订单:{}", id);
 
-        orderService.cancel(id);
+        OrdersCancelDTO ordersCancelDTO = new OrdersCancelDTO();
+        ordersCancelDTO.setId(id);
+
+        orderService.cancel(ordersCancelDTO);
 
         return Result.success(MessageConstant.OPERATE_SUCCESS);
     }

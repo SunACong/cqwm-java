@@ -24,4 +24,5 @@ public interface SetmealService {
     void startOrStop(Integer status, Long id);
     List<Setmeal> list(Setmeal setmeal);
     List<DishItemVO> getDishItemById(Long id);
+
 }

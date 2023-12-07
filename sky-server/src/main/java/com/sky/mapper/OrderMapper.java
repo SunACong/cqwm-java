@@ -46,4 +46,6 @@ public interface OrderMapper {
 
 
     Integer countOrder(Map map1);
+
+    Integer countOrderUser(HashMap map);
 }
