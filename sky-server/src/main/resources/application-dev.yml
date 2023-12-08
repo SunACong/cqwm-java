@@ -1,23 +1,23 @@
 sky:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    host: localhost
-    port: 3306
-    database: sky_take_out
-    username: root
-    password: 123456
+    host:
+    port:
+    database:
+    username:
+    password:
   file:
     upload-dir: E://MyProject//cqwm//nginx-1.20.2//html//sky//static
   wechat:
-    appid: wx310e78c9795aeffc
-    secret: 2773c1f3bd22ef8015dfd0bdec953eb1
-    mchid : 1561414331
-    mchserialNo: 4B3B3DC35414AD50B1B755BAF8DE9CC7CF407606
-    privateKeyFilePath: D:\pay\apiclient\key.pem
-    apiV3Key: CZBK51236435wxpay435434323FFDuv3
-    weChatPayCertFilePath: D:\pay\wechatpay\166D96F876F45C7D07CE98952A96EC980368ACFC.pem
-    notifyUrl: https://6619cf50.r6.cpolar.top/notify/paySuccess
-    refundNotifyUrl: https://6619cf50.r6.cpolar.top/notify/refundSuccess
+    appid:
+    secret:
+    mchid :
+    mchserialNo:
+    privateKeyFilePath:
+    apiV3Key:
+    weChatPayCertFilePath:
+    notifyUrl:
+    refundNotifyUrl:
 
 spring:
   redis:
